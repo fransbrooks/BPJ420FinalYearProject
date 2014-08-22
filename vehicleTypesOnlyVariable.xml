@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<vehicleTypes>
+		<vehicleType id="6_tonner">
+			<description>null</description>
+			<capacity>6000</capacity>
+			<costInformation fix="0.0" perMeter="0.91091" perSecond="0.0"/>
+		</vehicleType>
+		<vehicleType id="7_tonner">
+			<description>null</description>
+			<capacity>7000</capacity>
+			<costInformation fix="0.0" perMeter="0.96588" perSecond="0.0"/>
+		</vehicleType>
+		<vehicleType id="12_tonner">
+			<description>null</description>
+			<capacity>12000</capacity>
+			<costInformation fix="0.0" perMeter="0.73485" perSecond="0.0"/>
+		</vehicleType>
+		<vehicleType id="3_tonner">
+			<description>null</description>
+			<capacity>3000</capacity>
+			<costInformation fix="0.0" perMeter="0.77636" perSecond="0.0"/>
+		</vehicleType>
+		<vehicleType id="15_tonner">
+			<description>null</description>
+			<capacity>15000</capacity>
+			<costInformation fix="0.0" perMeter="0.72059" perSecond="0.0"/>
+		</vehicleType>
+	</vehicleTypes>
+
