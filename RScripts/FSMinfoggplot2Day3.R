@@ -361,10 +361,45 @@ g <- g + theme_bw(base_size = 14) + ggtitle("Total Distance")
 pdf("TotalDistance.pdf", width = 13)
 print(g)
 dev.off()
-##Generate LaTeX code for Fleet Composition and Total Costs 
 
+##Generate LaTeX code for Fleet Composition and Total Costs 
 xtable(TruckTotals)
 xtable(TotCostData)
 
+##Convert info generated from CarrierPlanInterpreter into convenient units to export to tables
+FSMinfoFix$totDist <- FSMinfoFix$totDist/1000 #Convert from m to km
+FSMinfoFix$totTravelTime <- FSMinfoFix$totTravelTime/(60^2) #Convert from seconds to hours
+FSMinfoFix <- FSMinfoFix[,-2] #Remove the score column from the data.frame
+FSMinfoFix <- FSMinfoFix[,-5] #Remove the totActTime column from the data.frame
+colnames(FSMinfoFix) <- c("Vehicle", "Number of Activities", "Total Distance (in km)", "Total Travel Time (in hours)")
+##Repeat for fixed and variable cost
+FSMinfoFixAndVar$totDist <- FSMinfoFixAndVar$totDist/1000 #Convert from m to km
+FSMinfoFixAndVar$totTravelTime <- FSMinfoFixAndVar$totTravelTime/(60^2) #Convert from seconds to hours
+FSMinfoFixAndVar <- FSMinfoFixAndVar[,-2] #Remove the score column from the data.frame
+FSMinfoFixAndVar <- FSMinfoFixAndVar[,-5] #Remove the totActTime column from the data.frame
+colnames(FSMinfoFixAndVar) <- c("Vehicle", "Number of Activities", "Total Distance (in km)", "Total Travel Time (in hours)")
+##Repeat for running-fixed-cost
+FSMinfoRunFix$totDist <- FSMinfoRunFix$totDist/1000 #Convert from m to km
+FSMinfoRunFix$totTravelTime <- FSMinfoRunFix$totTravelTime/(60^2) #Convert from seconds to hours
+FSMinfoRunFix <- FSMinfoRunFix[,-2] #Remove the score column from the data.frame
+FSMinfoRunFix <- FSMinfoRunFix[,-5] #Remove the totActTime column from the data.frame
+colnames(FSMinfoRunFix) <- c("Vehicle", "Number of Activities", "Total Distance (in km)", "Total Travel Time (in hours)")
+##Repeat for running-fixed-cost and variable cost
+FSMinfoRunFixAndVar$totDist <- FSMinfoRunFixAndVar$totDist/1000 #Convert from m to km
+FSMinfoRunFixAndVar$totTravelTime <- FSMinfoRunFixAndVar$totTravelTime/(60^2) #Convert from seconds to hours
+FSMinfoRunFixAndVar <- FSMinfoRunFixAndVar[,-2] #Remove the score column from the data.frame
+FSMinfoRunFixAndVar <- FSMinfoRunFixAndVar[,-5] #Remove the totActTime column from the data.frame
+colnames(FSMinfoRunFixAndVar) <- c("Vehicle", "Number of Activities", "Total Distance (in km)", "Total Travel Time (in hours)")
+##Repeat for variable cost
+FSMinfoVar$totDist <- FSMinfoVar$totDist/1000 #Convert from m to km
+FSMinfoVar$totTravelTime <- FSMinfoVar$totTravelTime/(60^2) #Convert from seconds to hours
+FSMinfoVar <- FSMinfoVar[,-2] #Remove the score column from the data.frame
+FSMinfoVar <- FSMinfoVar[,-5] #Remove the totActTime column from the data.frame
+colnames(FSMinfoVar) <- c("Vehicle", "Number of Activities", "Total Distance (in km)", "Total Travel Time (in hours)")
 
-
+##Export tables indicating number of activities, total distance traveled and total travel time per vehicle
+xtable(FSMinfoFix)
+xtable(FSMinfoFixAndVar)
+xtable(FSMinfoRunFix)
+xtable(FSMinfoRunFixAndVar)
+xtable(FSMinfoVar)
