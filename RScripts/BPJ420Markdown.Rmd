@@ -3,7 +3,7 @@ title: "Reproduceable Research"
 output:
   pdf_document: default
 ---
-The following document shows how the statistical and graphics program \textit{R} is used to analyse data for this project. Set the working directory to where the output files for "MyCarrierPlanInterpreter.java" are. These files are available at the github repository for this project. The outputs for "MyCarrierPlanInterpreter.java" can be found at <https://github.com/fransbrooks/BPJ420FinalYearProject/tree/master/CarrierPlanInterpreter>. For the purposes of this document an analysis of day 3's demand will be shown.  The relevant directories and file names can be changed to analyse the demand for any specific day. The directory specified should contain all the files produced as output for a given day of demand data. This should result in a directory for a given day of demand containing 15 .csv files.
+The following document shows how the statistical and graphics program \textit{R} is used to analyse data for this project. Set the working directory to where the output files for \texttt{MyCarrierPlanInterpreter.java} are. These files are available at the github repository for this project. The outputs for \texttt{MyCarrierPlanInterpreter.java} can be found at <https://github.com/fransbrooks/BPJ420FinalYearProject/tree/master/CarrierPlanInterpreter>. For the purposes of this document an analysis of day 3's demand will be shown.  The relevant directories and file names can be changed to analyse the demand for any specific day. The directory specified should contain all the files produced as output for a given day of demand data. This should result in a directory for a given day of demand containing 15 .csv files.
 ```{r}
 setwd("/home/frans/Documents/BPJ420/CarrierPlanInterpreter/Day3")
 ```
@@ -20,7 +20,7 @@ setwd("/home/frans/Documents/BPJ420/CarrierPlanInterpreter/Day3")
 FSMinfoRunFixAndVar <- read.csv("Day3_80_vehicleTypesFixedRunningAndVariablesumValues.csv")
 FSMinfoRunFixAndVar
 ```
-Make separate tables for each type of truck for running-fixed-cost and variable cost. Do this by subsetting the data read in  above. Subset by searching for a string within the vehId column of the "FSMinfoRunFixAndVar" data.frame, in order to identify the vehicle type. The string identifying the vehicle type is searched for by making use of the grep function.
+Make separate tables for each type of truck for running-fixed-cost and variable cost. Do this by subsetting the data read in  above. Subset by searching for a string within the vehId column of the \texttt{FSMinfoRunFixAndVar} data.frame, in order to identify the vehicle type. The string identifying the vehicle type is searched for by making use of the grep function.
 ```{r}
 RunFixAndVarThreeTonners <- FSMinfoRunFixAndVar[grep("truck_3",FSMinfoRunFixAndVar$vehId),]
 RunFixAndVarSixTonners <- FSMinfoRunFixAndVar[grep("truck_6",FSMinfoRunFixAndVar$vehId),]
@@ -39,7 +39,7 @@ Find the number of rows for each truck type from the data frames by using the le
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- rbind(c(length(RunFixAndVarThreeTonners$vehId),length(RunFixAndVarSixTonners$vehId),length(RunFixAndVarSevenTonners$vehId),length(RunFixAndVarTwelveTonners$vehId),length(RunFixAndVarFifteenTonners$vehId)))
 ```
-Assign the column names to the data.frame "TruckTotals" in order to see how many of each vehicle type was specified in the solution to the FSMVRP. Name the row according to the cost parameters that were used in order to generate the fleet composition.
+Assign the column names to the data.frame \texttt{TruckTotals} in order to see how many of each vehicle type was specified in the solution to the FSMVRP. Name the row according to the cost components that were considered in order to generate the fleet composition.
 ```{r}
 colnames(TruckTotals) <- CollumnNames
 rownames(TruckTotals) <- "RunFixAndVar"
@@ -59,7 +59,7 @@ VarSevenTonners <- FSMinfoVar[grep("truck_7",FSMinfoVar$vehId),]
 VarTwelveTonners <- FSMinfoVar[grep("truck_12",FSMinfoVar$vehId),]
 VarFifteenTonners <- FSMinfoVar[grep("truck_15",FSMinfoVar$vehId),]
 ```
-Append the data for using variable cost only to the TruckTotals data.frame and change the row names to reflect the newly added data.
+Append the data for using variable cost only to the \texttt{TruckTotals} data.frame and change the row names to reflect the newly added data.
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- rbind(TruckTotals,c(length(VarThreeTonners$vehId),length(VarSixTonners$vehId),length(VarSevenTonners$vehId),length(VarTwelveTonners$vehId),length(VarFifteenTonners$vehId)))
 rownames(TruckTotals) <- c("RunFixAndVar","VarOnly")
@@ -78,7 +78,7 @@ RunFixSevenTonners <- FSMinfoRunFix[grep("truck_7",FSMinfoRunFix$vehId),]
 RunFixTwelveTonners <- FSMinfoRunFix[grep("truck_12",FSMinfoRunFix$vehId),]
 RunFixFifteenTonners <- FSMinfoRunFix[grep("truck_15",FSMinfoRunFix$vehId),]
 ```
-Append the data for using variable cost only to the TruckTotals data.frame.
+Append the data for using variable cost only to the \texttt{TruckTotals} data.frame.
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- rbind(TruckTotals,c(length(RunFixThreeTonners$vehId),length(RunFixSixTonners$vehId),length(RunFixSevenTonners$vehId),length(RunFixTwelveTonners$vehId),length(RunFixFifteenTonners$vehId)))
 rownames(TruckTotals) <- c("RunFixAndVar","VarOnly","RunFixOnly")
@@ -97,7 +97,7 @@ FixAndVarSevenTonners <- FSMinfoFixAndVar[grep("truck_7",FSMinfoFixAndVar$vehId)
 FixAndVarTwelveTonners <- FSMinfoFixAndVar[grep("truck_12",FSMinfoFixAndVar$vehId),]
 FixAndVarFifteenTonners <- FSMinfoFixAndVar[grep("truck_15",FSMinfoFixAndVar$vehId),]
 ```
-Append the data for using fixed and variable cost to the TruckTotals data.frame.
+Append the data for using fixed and variable cost to the \texttt{TruckTotals} data.frame.
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- rbind(TruckTotals,c(length(FixAndVarThreeTonners$vehId),length(FixAndVarSixTonners$vehId),length(FixAndVarSevenTonners$vehId),length(FixAndVarTwelveTonners$vehId),length(FixAndVarFifteenTonners$vehId)))
 rownames(TruckTotals) <- c("RunFixAndVar","VarOnly","RunFixOnly","FixAndVar")
@@ -116,13 +116,13 @@ FixSevenTonners <- FSMinfoFix[grep("truck_7",FSMinfoFixAndVar$vehId),]
 FixTwelveTonners <- FSMinfoFix[grep("truck_12",FSMinfoFixAndVar$vehId),]
 FixFifteenTonners <- FSMinfoFix[grep("truck_15",FSMinfoFixAndVar$vehId),]
 ```
-Append the data for using fixed cost only to the TruckTotals data.frame
+Append the data for using fixed cost only to the \texttt{TruckTotals} data.frame
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- rbind(TruckTotals,c(length(FixThreeTonners$vehId),length(FixSixTonners$vehId),length(FixSevenTonners$vehId),length(FixTwelveTonners$vehId),length(FixFifteenTonners$vehId)))
 rownames(TruckTotals) <- c("Running-Fixed-Cost and Variable Cost","Variable Cost","Running-Fixed-Cost","Fixed and Variable Cost","Fixed Cost")
 ```
-##Finalise the TruckTotals data.frame
-Add a new column which shows total number of vehicles for each cost scenario by using the rowSums function. Append the new column to the TruckTotals data.frame by using the cbind function. The TruckTotals data.frame now shows the fleet composition sing each set of cost parameters for day 3's demand data.
+##Finalise the \texttt{TruckTotals} data.frame
+Add a new column which shows total number of vehicles for each cost scenario by using the rowSums function. Append the new column to the \texttt{TruckTotals} data.frame by using the cbind function. The \texttt{TruckTotals} data.frame now shows the fleet composition sing each set of cost parameters for day 3's demand data.
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
 TruckTotals <- cbind(TruckTotals, rowSums(TruckTotals))
 CollumnNames <- c("3Tonners", "6Tonners", "7Tonners", "12Tonners", "15Tonners", "Total")
@@ -131,263 +131,41 @@ TruckTotals
 ```
 
 ##Generate \LaTeX  Code for Fleet Compositions
-Use the xtable package to generate a table in \LaTeX  code for use in \LaTeX  documents.
+Use the xtable package to generate a table in \LaTeX  code for use in \LaTeX documents.
 ```{r}
 xtable(TruckTotals)
 ```
-#Make Fleet Composition Plots
-##Plot fleet composition for running-fixed-cost and variable cost with ggplot2 package
-Make the variable x equal to the column names and change the x to be of the character class. Then change x to a factor variable. Use the factor function and its arguments to preserve the order of the original CollumnNames so that fleet composition can be plotted from the smaller sized vehicles to the larger sized vehicles. If this procedure is not followed the plots will change the order of vehicles on the x-axis to alphabetical order, leading to 12-ton vehicles being plotted first instead of 3-ton vehicles being plotted first.
-```{r}
-x <- CollumnNames
-x <- as.character(x)
-x <- factor(x, levels=unique(x))
+#Fleet compositions plot
+Change the \texttt{TruckTotals} data.frame into the 'long format' using the \texttt{melt} from the reshape2 package. This makes it possible to plot the fleet compositions for all the costs in one plot by means of stacked bars. The \texttt{Totals} column must be removed from \texttt{TruckTotals}, becuase the total size of the fleet will be represented by the stacked bar. Spaces in the column names are also removed, so the columns can be reffered to in the ggplot function. Referring to column names with spaces in the ggplot function generates an error.
+```{r tidy=TRUE, tidy.opts=list(width.cutoff=80)}
+TruckTotals <- TruckTotals[,-6] #Remove the "Totals" column
+library(reshape2)
+m.TruckTotals <- melt(TruckTotals)
+colnames(m.TruckTotals) <- c("CostParameters","VehicleType","NumOfVehicles")
+StackPlot <- ggplot(data=m.TruckTotals, aes(x=CostParameters,y=NumOfVehicles,fill=VehicleType)) + geom_bar(stat='identity', width=.5)
+StackPlot <- StackPlot + coord_flip() + xlab("Cost considered in optimization") + ylab("Number of trucks") + scale_fill_brewer(palette = "Set1")
+StackPlot <- StackPlot + theme_bw() + ggtitle("Fleet composition, day 3")
+StackPlot
 ```
-Let y be equal to the first row of the TruckTotals data.frame, because it is the relevant row for plotting the fleet composition for running-fixed-cost and variable cost.
+
+#Distance travelled plot
+Add a column called "Cost" to each data.frame which contains the information for each model run. Add a variable to each row of the \texttt{Cost} column which describes the cost components considered in the model. Because the cost components used is the same for each data.frame, each row can be assigned the same value for the \texttt{Cost} variable. Create a new data.frame, \texttt{FSMinfo}. This data.frame will be appended with all the data from each model run, so the distance information can be plotted in a single plot. 
 ```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-TruckTotals[1,]
-y <- TruckTotals[1,]
-```
-Store the data of x and y in a new data.frame that will be used to generate a plot using the ggplot function from the ggplot2package
-```{r}
-ggplotData <- data.frame(x,y)
-```
-Plot the data to show the fleet composition when running-fixed-cost and variable cost input parameters are used.
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=30)}
-g <- ggplot(data = ggplotData, aes(x=x,y=y)) + geom_bar(stat="identity") + xlab("Truck Type") + ylab("Number of Trucks") 
-g <- g + theme_bw(base_size = 14) + ggtitle("Fleet Composition for Running-Fixed-Cost \nand Variable Cost") 
-g1 <- g + coord_cartesian(ylim=c(0, 5)) + scale_y_continuous(breaks=seq(0, 5, 1))
-print(g1)
-```
-
-##Plot fleet composition for variable cost with ggplot2 package
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- CollumnNames
-x <- as.character(x)
-x <- factor(x, levels=unique(x))
-y <- TruckTotals[2,]
-ggplotData <- data.frame(x,y)
-g <- ggplot(data = ggplotData, aes(x=x,y=y)) + geom_bar(stat="identity") + xlab("Truck Type") + ylab("Number of Trucks") 
-g <- g + theme_bw(base_size = 14) + ggtitle("Fleet Composition for Variable Cost") 
-g2 <- g + coord_cartesian(ylim=c(0, 5)) + scale_y_continuous(breaks=seq(0, 5, 1))
-print(g2)
+FSMinfoFix["Cost"] <- "Fixed cost"
+FSMinfoFixAndVar["Cost"] <- "Fixed and variable cost"
+FSMinfoRunFix["Cost"] <- "Running-fixed-cost"
+FSMinfoRunFixAndVar["Cost"] <- "Running-fixed-cost and variable cost"
+FSMinfoVar["Cost"] <- "Variable cost"
+FSMinfo <- data.frame()
+FSMinfo <- rbind(FSMinfoFix,FSMinfoFixAndVar,FSMinfoRunFix,FSMinfoRunFixAndVar,FSMinfoVar)
+colnames(FSMinfo) <- c("VehicleID", "NumOfActivities","TotalDistKM", "TotalTravelTimeHours","Cost")
+FSMinfo$VehicleID <- factor(x = FSMinfo$VehicleID, c("truck_3_1","truck_3_1_0", "truck_3_1_1", "truck_6_1", "truck_6_1_0",  "truck_12_1", "truck_15_1", "truck_15_1_0", "truck_15_1_1"))
+FSMinfo$TotalDistKM <- round(FSMinfo$TotalDistKM,0)
+DistanceStackPlot <- ggplot(data=FSMinfo, aes(x=Cost,y=TotalDistKM,fill=VehicleID)) + geom_bar(stat='identity', width=.5)
+DistanceStackPlot <- DistanceStackPlot + scale_fill_brewer(palette = "Set1") + xlab("Cost considered in optimization") + ylab("Distance travelled (km)")
+DistanceStackPlot <- DistanceStackPlot + theme_bw() + ggtitle("Distance travelled, day 3") + geom_text(aes(label =TotalDistKM), position = "stack", hjust = 0.5, vjust = 1.1)
+DistanceStackPlot <- DistanceStackPlot + scale_x_discrete(labels = c("Fixed and variable cost" = "Fixed and \nvariable cost", "Running-fixed-cost and variable cost" = "Running-fixed- \ncost and \nvariable cost", "Running-fixed-cost" = "Running-fixed- \ncost"))
+DistanceStackPlot
 ```
 
-##Plot fleet composition for running-fixed-cost with ggplot2 package
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- CollumnNames
-x <- as.character(x)
-x <- factor(x, levels=unique(x))
-y <- TruckTotals[3,]
-ggplotData <- data.frame(x,y)
-g <- ggplot(data = ggplotData, aes(x=x,y=y)) + geom_bar(stat="identity") + xlab("Truck Type") + ylab("Number of Trucks") 
-g <- g + theme_bw(base_size = 14) + ggtitle("Fleet Composition for Running-Fixed-Cost") 
-g3 <- g + coord_cartesian(ylim=c(0, 5)) + scale_y_continuous(breaks=seq(0, 5, 1))
-print(g3)
-```
-
-##Plot fleet composition for fixed and variable cost with ggplot2 package
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- CollumnNames
-x <- as.character(x)
-x <- factor(x, levels=unique(x))
-y <- TruckTotals[4,]
-ggplotData <- data.frame(x,y)
-g <- ggplot(data = ggplotData, aes(x=x,y=y)) + geom_bar(stat="identity") + xlab("Truck Type") + ylab("Number of Trucks") 
-g <- g + theme_bw(base_size = 14) + ggtitle("Fleet Composition for Fixed and Variable Cost") 
-g4 <- g + coord_cartesian(ylim=c(0, 5)) + scale_y_continuous(breaks=seq(0, 5, 1))
-print(g4)
-```
-
-##Plot fleet composition for fixed cost with ggplot2 package
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- CollumnNames
-x <- as.character(x)
-x <- factor(x, levels=unique(x))
-y <- TruckTotals[5,]
-ggplotData <- data.frame(x,y)
-g <- ggplot(data = ggplotData, aes(x=x,y=y)) + geom_bar(stat="identity") + xlab("Truck Type") + ylab("Number of Trucks") 
-g <- g + theme_bw(base_size = 14) + ggtitle("Fleet Composition for Fixed Cost") 
-g5 <- g + coord_cartesian(ylim=c(0, 5)) + scale_y_continuous(breaks=seq(0, 5, 1))
-print(g5)
-```
-
-##Define the multiplot function
-The multiplot function was obtained from <http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/>. It enables one to plot multiple plots generated with the ggplot2 package in one plot.
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
-        require(grid)
-        
-        # Make a list from the ... arguments and plotlist
-        plots <- c(list(...), plotlist)
-        
-        numPlots = length(plots)
-        
-        # If layout is NULL, then use 'cols' to determine layout
-        if (is.null(layout)) {
-                # Make the panel
-                # ncol: Number of columns of plots
-                # nrow: Number of rows needed, calculated from # of cols
-                layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                                 ncol = cols, nrow = ceiling(numPlots/cols))
-        }
-        
-        if (numPlots==1) {
-                print(plots[[1]])
-                
-        } else {
-                # Set up the page
-                grid.newpage()
-                pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
-                
-                # Make each plot, in the correct location
-                for (i in 1:numPlots) {
-                        # Get the i,j matrix positions of the regions that contain this subplot
-                        matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
-                        
-                        print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
-                                                        layout.pos.col = matchidx$col))
-                }
-        }
-}
-```
-
-##Plot the fleet compositions for various cost parameters 
-```{r tidy=TRUE, fig.height=12, fig.width=12}
-AllFC <- multiplot(g1,g2,g3,g4,g5, cols=2)
-```
-
-#Total Cost 
-Create a data.frame which contains the total cost value for each model run. The character vector x specifies the the cost parameters used. 
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- c("Fixed Cost", "Fixed and Variable Cost", "Running-Fixed-Cost", "Running-Fixed-Cost and Variable Cost", "Variable Cost")
-```
-
-y is a vector which shows the total cost for each set of cost parameters. The value extracted from the data frames containing the cost is in cent. It is divided by 100 to obtain the value in Rand. These values are also multiplied by a factor -1, because the output from "MyCarrierPlanInterpreter.java" gives a negative value for the cost, which is called "score" in the .csv file produced as output by "MyCarrierPlanInterpreter.java". To obtain the cost only the first row of each data frame's score value is extracted, because each row gives the same value, which is the total cost.
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-FSMinfoFix
-FSMinfoFixAndVar
-FSMinfoRunFix
-FSMinfoRunFixAndVar
-FSMinfoVar
-y <- c(FSMinfoFix$score[1]/100, FSMinfoFixAndVar$score[1]/100, FSMinfoRunFix$score[1]/100, FSMinfoRunFixAndVar$score[1]/100, FSMinfoVar$score[1]/100)*-1
-y
-```
-
-The total cost data is stored in a new data.frame
-```{r}
-TotCostData <- data.frame(x,y)
-TotCostData
-```
-
-##Plotting the total cost data 
-```{r tidy=TRUE, fig.width= 14, tidy.opts=list(width.cutoff=40)}
-g <- ggplot(data = TotCostData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Cost Input Parameters") +ylab("Cost (in R)")
-g <- g + theme_bw(base_size = 14) + ggtitle("Total Cost") 
-print(g)
-```
-
-##Generating a table in \LaTeX code for total cost data
-```{r tidy=TRUE}
-xtable(TotCostData)
-```
-#Distance Travelled
-##Running-Fixed-Cost and Variable Cost
-The information from for the running-fixed-cost model is used. 
-```{r}
-FSMinfoRunFixAndVar
-```
-This is the information that was read in from the .csv file. Let x be a vector that contains all the vehicles of the fleet specified by the solution to the FSMVRP. 
-```{r}
-x <- FSMinfoRunFixAndVar$vehId
-x 
-```
-Let y be a vector containing the total distance that each vehicle has travelled.
-```{r tidy=TRUE}
-y <- FSMinfoRunFixAndVar$totDist
-```
-Convert the distance from metres to \textit{km}
-```{r tidy=TRUE}
-y <- y/1000 
-y
-```
-Put the data for x and y in a data.frame called DistanceData so it can be plotted.
-```{r}
-DistanceData <- data.frame(x,y)
-```
-Plot the total distance travelled by each vehicle against that vehicle's name.
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=20)}
-g <- ggplot(data = DistanceData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Vehicle") +ylab("Total Distance Travelled (in km)")
-gD1 <- g + ggtitle("Running-Fixed-Cost and Variable Cost \nTotal Distance Travelled per Vehicle") + theme_bw(base_size = 10)
-gD1 <- gD1 + coord_cartesian(ylim=c(0, 450)) + scale_y_continuous(breaks=seq(0, 450, 50))
-print(gD1)
-```
-
-##Variable Cost
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- FSMinfoVar$vehId
-y <- FSMinfoVar$totDist
-y <- y/1000 
-DistanceData <- data.frame(x,y)
-g <- ggplot(data = DistanceData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Vehicle") +ylab("Total Distance Travelled (in km)")
-gD2 <- g + ggtitle("Variable Cost \nTotal Distance Travelled per Vehicle") + theme_bw(base_size = 10)
-gD2 <- gD2 + coord_cartesian(ylim=c(0, 450)) + scale_y_continuous(breaks=seq(0, 450, 50))
-print(gD2)
-```
-
-##Running-Fixed-Cost
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- FSMinfoRunFix$vehId
-y <- FSMinfoRunFix$totDist
-y <- y/1000
-DistanceData <- data.frame(x,y)
-g <- ggplot(data = DistanceData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Vehicle") +ylab("Total Distance Travelled (in km)")
-gD3 <- g + ggtitle("Running-Fixed-Cost \nTotal Distance Travelled per Vehicle") + theme_bw(base_size = 10)
-gD3 <- gD3 + coord_cartesian(ylim=c(0, 450)) + scale_y_continuous(breaks=seq(0, 450, 50))
-print(gD3)
-```
-
-##Fixed and Variable Cost
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- FSMinfoFixAndVar$vehId
-y <- FSMinfoFixAndVar$totDist
-y <- y/1000 ##Convert y from metres to kilometres
-DistanceData <- data.frame(x,y)
-g <- ggplot(data = DistanceData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Vehicle") +ylab("Total Distance Travelled (in km)")
-gD4 <- g + ggtitle("Fixed and Variable Cost \nTotal Distance Travelled per Vehicle") + theme_bw(base_size = 10)
-gD4 <- gD4 + coord_cartesian(ylim=c(0, 450)) + scale_y_continuous(breaks=seq(0, 450, 50))
-pdf("VehicleDistanceFixAndVar.pdf")
-print(gD4)
-```
-
-##Fixed Cost
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- FSMinfoFix$vehId
-y <- FSMinfoFix$totDist
-y <- y/1000 ##Convert y from metres to kilometres
-DistanceData <- data.frame(x,y)
-g <- ggplot(data = DistanceData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Vehicle") +ylab("Total Distance Travelled (in km)")
-gD5 <- g + ggtitle("Fixed Cost \nTotal Distance Travelled per Vehicle") + theme_bw(base_size = 10)
-gD5 <- gD5 + coord_cartesian(ylim=c(0, 450)) + scale_y_continuous(breaks=seq(0, 450, 50))
-print(gD5)
-```
-
-##Combining Distance Plots
-Plot distance travelled per vehicle for different cost parameters using the multiplot function.
-```{r tidy=TRUE, fig.height=12, fig.height=8}
-Alldist <- multiplot(gD1,gD2,gD3,gD4,gD5, cols=2)
-```
-
-##Total Distance for All Trucks
-##Plot total distance travelled for each set of cost parameters
-Let x be a character vector containing all the sets of cost inputs.
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40)}
-x <- c("Fixed Cost", "Fixed and Variable Cost", "Running-Fixed-Cost", "Running-Fixed-Cost and Variable Cost", "Variable Cost")
-```
-Let y be a numeric vector giving the total distance travelled by all vehicles for each set of cost parameters. The sum function sums the distance travelled by all the vehicles from the various data frames that contain the information for a single model run. Each value is divided by 1000 to convert from metres to \textit{km}. 
-```{r tidy=TRUE, tidy.opts=list(width.cutoff=40), fig.width=13}
-y <- c(sum(FSMinfoFix$totDist)/1000, sum(FSMinfoFixAndVar$totDist)/1000, sum(FSMinfoRunFix$totDist)/1000, sum(FSMinfoRunFixAndVar$totDist)/1000, sum(FSMinfoVar$totDist)/1000)
-TotDistData <- data.frame(x,y)
-g <- ggplot(data = TotDistData, aes(x=x, y=y)) + geom_bar(stat="identity") +xlab("Cost Parameters") + ylab("Total Distance (in km)")
-g <- g + theme_bw(base_size = 14) + ggtitle("Total Distance") 
-print(g)
+The code used to generate this .pdf plot for the project's final document is identical, but for an unknown reason the plot does not display correctly in this .pdf document, which is generated by 'knitting' this R Markdown document to a .pdf file.
